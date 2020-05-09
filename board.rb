@@ -49,7 +49,7 @@ class Board
 
   def reveal(pos)
     if revealed?(pos)
-      puts "The card has already been flipped."
+      raise
     else 
       self[pos].reveal
     end
