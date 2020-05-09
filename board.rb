@@ -2,7 +2,7 @@ require_relative 'card'
 
 class Board
 
-  attr_reader :grid, :size
+  attr_reader :size
 
   def initialize(size = 4)
     @grid = Array.new(size){ Array.new(size) }
@@ -36,4 +36,31 @@ class Board
       end
     end
   end
+
+  def won?
+    grid.all? do |row|
+      row.all?(&:revealed?)
+    end
+  end
+
+  def revealed?(pos)
+    self[pos].revealed?
+  end
+
+  def reveal(pos)
+    if revealed?(pos)
+      puts "The card has already been flipped."
+    else 
+      self[pos].reveal
+    end
+    self[pos].value
+   end
+
+   def hide(pos)
+    self[pos].hide
+   end
+
+   private
+
+   attr_reader :grid
 end
