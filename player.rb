@@ -3,7 +3,7 @@ class Player
 attr_accessor :previous_guess
 attr_reader :name
 
-  def initialize
+  def initialize(_size)
     @previous_guess = nil
   end
 
@@ -19,5 +19,13 @@ attr_reader :name
 
   def parse(string)
     string.split.map(&:to_i)
+  end
+
+  #duck typing
+  def receive_match(_pos1, _pos2)
+    puts "It's a match!"
+  end
+
+  def reveive_revealed_cards(pos, val)
   end
 end

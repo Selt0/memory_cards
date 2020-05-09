@@ -1,5 +1,6 @@
 require_relative 'board'
 require_relative 'player'
+require_relative 'computer'
 
 class Game
   attr_reader :player
@@ -36,7 +37,8 @@ class Game
 
   def make_guess(pos)
     #reveal the pos
-    board.reveal(pos)
+    revealed_value = board.reveal(pos)
+    player.receive_revealed_card(pos, revealed_value)
     board.render
 
     #compare the guess
@@ -48,14 +50,15 @@ class Game
   end
 
   def compare_guess(new_guess)
+    prev_guess = player.previous_guess
     #compare if there is a previous_guess
-    if player.previous_guess
-      if match?(player.previous_guess, new_guess)
-        puts "It's a match!"
+    if prev_guess
+      if match?(prev_guess, new_guess)
+        player.receive_match(prev_guess, new_guess)
       else
         puts "Try again."
         #hide the match
-        [player.previous_guess, new_guess].each { |pos| board.hide(pos) }
+        [prev_guess, new_guess].each { |pos| board.hide(pos) }
       end
       #reset guess
       player.previous_guess = nil
