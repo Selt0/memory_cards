@@ -95,3 +95,8 @@ class Game
   attr_accessor :previous_guess
 
 end
+
+if $PROGRAM_NAME == __FILE__
+  size = ARGV.empty? ? 4 : ARGV.shift.to_i
+  Game.new(ComputerPlayer.new(size), size).play
+end
