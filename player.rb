@@ -3,7 +3,7 @@ class Player
 attr_accessor :previous_guess
 attr_reader :name
 
-  def initialize(_size)
+  def initialize(_size = nil)
     @previous_guess = nil
   end
 
