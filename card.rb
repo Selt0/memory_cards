@@ -15,6 +15,8 @@ class Card
     values.map { |val| self.new(val) }
   end
 
+  attr_reader :value
+
   def initialize(value, revealed = false)
     @value = value
     @revealed = revealed
@@ -37,6 +39,6 @@ class Card
   end
 
   def ==(object)
-    object.is_a?(self.class) && object.value == @value
+    object.is_a?(self.class) && object.value == value
   end
 end
